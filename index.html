@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎓 Portal de Calificaciones - CREAMOS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #4b74c6 0%, #3949ab 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+            margin-bottom: 30px;
+            animation: slideDown 0.8s ease-out;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .school-info {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+        }
+
+        .school-name {
+            font-size: 2.2em;
+            font-weight: bold;
+            margin-bottom: 8px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .school-subtitle {
+            font-size: 1.1em;
+            opacity: 0.95;
+            margin-bottom: 15px;
+        }
+
+        .portal-title {
+            font-size: 1.3em;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .logo-section {
+            z-index: 3;
+        }
+
+        .logo {
+            width: 120px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            animation: logoFloat 3s ease-in-out infinite;
+        }
+
+        /* Motivational Section */
+        .motivational-section {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 25px;
+            animation: fadeInUp 1s ease-out 0.5s both;
+            box-shadow: 0 8px 32px rgba(240, 147, 251, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .motivational-section::before {
+            content: '🌟';
+            position: absolute;
+            font-size: 2em;
+            top: 15px;
+            left: 20px;
+            animation: sparkle 3s infinite;
+        }
+
+        .motivational-section::after {
+            content: '⭐';
+            position: absolute;
+            font-size: 1.5em;
+            bottom: 15px;
+            right: 20px;
+            animation: sparkle 3s infinite 1.5s;
+        }
+
+        .motivational-text {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .motivational-author {
+            font-size: 0.9em;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        /* Search Section */
+        .search-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease-out 0.8s both;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .search-title {
+            text-align: center;
+            color: #4b74c6;
+            font-size: 2em;
+            margin-bottom: 15px;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .search-title::before {
+            content: '🔍';
+            margin-right: 10px;
+        }
+
+        .search-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 1.1em;
+        }
+
+        .search-box {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .search-label {
+            background: linear-gradient(135deg, #4b74c6 0%, #667eea 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1em;
+            box-shadow: 0 4px 15px rgba(75, 116, 198, 0.3);
+        }
+
+        .search-input {
+            padding: 12px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 1em;
+            width: 250px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #4b74c6;
+            box-shadow: 0 0 0 4px rgba(75, 116, 198, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .search-button {
+            background: linear-gradient(135deg, #4b74c6 0%, #667eea 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(75, 116, 198, 0.3);
+        }
+
+        .search-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(75, 116, 198, 0.4);
+        }
+
+        .print-button {
+            background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .print-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+        }
+
+        /* Contact Info */
+        .contact-info {
+            background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1em;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(78, 205, 196, 0.3);
+            animation: fadeInUp 1s ease-out 1s both;
+        }
+
+        /* Student Info */
+        .student-info {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .student-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            align-items: center;
+        }
+
+        .info-field {
+            display: flex;
+            align-items: center;
+        }
+
+        .info-label {
+            background: linear-gradient(135deg, #4b74c6 0%, #667eea 100%);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px 0 0 8px;
+            font-weight: bold;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        .info-value {
+            background: white;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 0 8px 8px 0;
+            flex: 1;
+            font-weight: 500;
+            border: 2px solid #e0e0e0;
+        }
+
+        /* Tables */
+        .grades-section {
+            display: none;
+        }
+
+        .grades-table, .attendance-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            margin-bottom: 25px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .grades-table th, .grades-table td,
+        .attendance-table th, .attendance-table td {
+            padding: 12px;
+            text-align: center;
+            font-size: 0.9em;
+            border: 1px solid rgba(75, 116, 198, 0.1);
+        }
+
+        .grades-table th, .attendance-table th {
+            background: linear-gradient(135deg, #4b74c6 0%, #667eea 100%);
+            color: white;
+            font-weight: bold;
+            font-size: 0.8em;
+        }
+
+        .subject-name, .attendance-header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            font-weight: bold;
+            text-align: left !important;
+            padding-left: 15px !important;
+        }
+
+        /* Summary Cards */
+        .summary-section {
+            margin-top: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .summary-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .summary-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .summary-card-header {
+            background: linear-gradient(135deg, #4b74c6 0%, #667eea 100%);
+            color: white;
+            padding: 15px;
+            font-weight: bold;
+            font-size: 0.9em;
+            text-align: center;
+        }
+
+        .summary-card-content {
+            padding: 25px;
+            background: white;
+            font-size: 1.8em;
+            font-weight: bold;
+            text-align: center;
+            color: #4b74c6;
+        }
+
+        /* Loading and Error Messages */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            backdrop-filter: blur(20px);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #e0e0e0;
+            border-top: 4px solid #4b74c6;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-weight: bold;
+            padding: 15px;
+            background: rgba(248, 215, 218, 0.9);
+            border: 1px solid #dc3545;
+            border-radius: 10px;
+            display: none;
+            margin: 15px 0;
+            animation: shake 0.5s ease-in-out;
+        }
+
+        /* Animations */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes sparkle {
+            0%, 100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.2) rotate(180deg);
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            50% {
+                transform: translate(-50%, -50%) rotate(180deg);
+            }
+        }
+
+        @keyframes logoFloat {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-5px) rotate(1deg);
+            }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .header {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+                padding: 20px;
+            }
+
+            .school-name {
+                font-size: 1.8em;
+            }
+
+            .search-box {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-input {
+                width: 100%;
+            }
+
+            .student-info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .grades-table th, .grades-table td,
+            .attendance-table th, .attendance-table td {
+                padding: 8px;
+                font-size: 0.8em;
+            }
+
+            .summary-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media print {
+            .search-section,
+            .print-button,
+            .motivational-section {
+                display: none !important;
+            }
+
+            .grades-table, .attendance-table, .summary-card {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+
+            body {
+                background: white;
+            }
+
+            .header {
+                background: #4b74c6;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="areaImprimir">
+        <div class="container">
+            <!-- Header -->
+            <div class="header">
+                <div class="school-info">
+                    <div class="school-name">CENTRO DE EDUCACIÓN EXTRAESCOLAR</div>
+                    <div class="school-subtitle">ASOCIACIÓN CREAMOS</div>
+                    <div class="portal-title">🎓 Portal de Calificaciones Estudiantil 📚</div>
+                </div>
+                <div class="logo-section">
+                    <img src="Logo.png" alt="Logo CREAMOS" class="logo">
+                </div>
+            </div>
+
+            <!-- Motivational Message -->
+            <div class="motivational-section">
+                <div class="motivational-text" id="motivationalText">
+                    ¡Tu esfuerzo de hoy será tu éxito de mañana! ¡Sigue adelante! 🚀
+                </div>
+                <div class="motivational-author">- ¡Cree en ti mismo y alcanza tus sueños! -</div>
+            </div>
+
+            <!-- Search Section -->
+            <div class="search-section">
+                <h1 class="search-title">Consulta tus Calificaciones</h1>
+                <p class="search-subtitle">Ingresa tu ID estudiantil para ver tu progreso académico</p>
+                
+                <div class="search-box">
+                    <div class="search-label">🆔 ESCRIBE TU ID</div>
+                    <input type="text" class="search-input" id="studentId" placeholder="Ejemplo: EST2024001">
+                    <button class="search-button" onclick="buscarEstudiante()">🔍 BUSCAR</button>
+                    <button class="print-button" onclick="imprimirArea()">🖨️ IMPRIMIR</button>
+                </div>
+                
+                <div class="error-message" id="errorMessage"></div>
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>Buscando tu información académica...</p>
+                </div>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="contact-info">
+                <strong>📱 WHATSAPP:</strong> Plan Diario: 55-70-92-14 | Plan Domingo: 44-16-05-97
+            </div>
+
+            <!-- Student Info -->
+            <div class="student-info" id="studentInfo">
+                <div class="student-info-grid">
+                    <div class="info-field">
+                        <div class="info-label">👤 APELLIDOS:</div>
+                        <div class="info-value" id="studentName">ID no encontrado</div>
+                    
+
+                    <div class="info-field">
+                        <div class="info-label">✨ NOMBRES:</div>
+                        <div class="info-value" id="studentLastName">ID no encontrado</div>
+                    </div>
+</div>
+                    <div class="info-field">
+                        <div class="info-label">📚 GRADO:</div>
+                        <div class="info-value" id="studentGrade">BASICOS/BACHILLERATO</div>
+                     
+                    <div class="info-field">
+                        <div class="info-label">📅 JORNADA:</div>
+                        <div class="info-value">DIARIO / DOMINGO</div>
+                  </div> 
+                </div>
+            </div>
+
+            <!-- Grades Section -->
+            <div class="grades-section" id="gradesSection">
+                <table class="grades-table">
+                    <thead>
+                        <tr>
+                            <th>📖 CURSOS</th>
+                            <th>📝 TRIMESTRE 1</th>
+                            <th>📊 % T1</th>
+                            <th>📝 TRIMESTRE 2</th>
+                            <th>📊 % T2</th>
+                            <th>📝 TRIMESTRE 3</th>
+                            <th>📊 % T3</th>
+                            <th>🎯 TOTAL</th>
+                            <th>🏆 RESULTADO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="subject-name">📚 LENGUAJE/SOCIALES</td>
+                            <td id="lenguaje-t1">ND</td>
+                            <td id="lenguaje-p1">ND</td>
+                            <td id="lenguaje-t2">ND</td>
+                            <td id="lenguaje-p2">ND</td>
+                            <td id="lenguaje-t3">ND</td>
+                            <td id="lenguaje-p3">ND</td>
+                            <td id="lenguaje-total">ND</td>
+                            <td id="lenguaje-resultado">NO HAY RESULTADO</td>
+                        </tr>
+                        <tr>
+                            <td class="subject-name">🔢 MATEMATICAS</td>
+                            <td id="matematicas-t1">ND</td>
+                            <td id="matematicas-p1">ND</td>
+                            <td id="matematicas-t2">ND</td>
+                            <td id="matematicas-p2">ND</td>
+                            <td id="matematicas-t3">ND</td>
+                            <td id="matematicas-p3">ND</td>
+                            <td id="matematicas-total">ND</td>
+                            <td id="matematicas-resultado">NO HAY RESULTADO</td>
+                        </tr>
+                        <tr>
+                            <td class="subject-name">🔬 CIENCIAS NATURALES</td>
+                            <td id="naturales-t1">ND</td>
+                            <td id="naturales-p1">ND</td>
+                            <td id="naturales-t2">ND</td>
+                            <td id="naturales-p2">ND</td>
+                            <td id="naturales-t3">ND</td>
+                            <td id="naturales-p3">ND</td>
+                            <td id="naturales-total">ND</td>
+                            <td id="naturales-resultado">NO HAY RESULTADO</td>
+                        </tr>
+                        <tr>
+                            <td class="subject-name">💼 PRODUCTIVIDAD Y EMPRENDIMIENTO</td>
+                            <td id="emprendimiento-t1">ND</td>
+                            <td id="emprendimiento-p1">ND</td>
+                            <td id="emprendimiento-t2">ND</td>
+                            <td id="emprendimiento-p2">ND</td>
+                            <td id="emprendimiento-t3">ND</td>
+                            <td id="emprendimiento-p3">ND</td>
+                            <td id="emprendimiento-total">ND</td>
+                            <td id="emprendimiento-resultado">NO HAY RESULTADO</td>
+                        </tr>
+                        <tr>
+                            <td class="subject-name">💻 COMPUTACION</td>
+                            <td id="computacion-t1">ND</td>
+                            <td id="computacion-p1">ND</td>
+                            <td id="computacion-t2">ND</td>
+                            <td id="computacion-p2">ND</td>
+                            <td id="computacion-t3">ND</td>
+                            <td id="computacion-p3">ND</td>
+                            <td id="computacion-total">ND</td>
+                            <td id="computacion-resultado">NO HAY RESULTADO</td>
+                        </tr>
+                        <tr>
+                            <td class="subject-name">🌍 INGLÉS</td>
+                            <td>ND</td>
+                            <td>ND</td>
+                            <td>ND</td>
+                            <td>ND</td>
+                            <td>ND</td>
+                            <td>ND</td>
+                            <td>ND</td>
+                            <td>NO HAY RESULTADO</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="attendance-section">
+                    <table class="attendance-table">
+                        <thead>
+                            <tr>
+                                <th colspan="4">📅 DETALLES DE LAS ASISTENCIAS</th>
+                            </tr>
+                            <tr>
+                                <th>📋 TIPOS DE REGISTROS</th>
+                                <th>📝 TRIMESTRE 1</th>
+                                <th>📝 TRIMESTRE 2</th>
+                                <th>📝 TRIMESTRE 3</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="attendance-header">⏰ ENTRADAS PUNTUALES</td>
+                                <td id="puntual-t1">ND</td>
+                                <td id="puntual-t2">ND</td>
+                                <td id="puntual-t3">ND</td>
+                            </tr>
+                            <tr>
+                                <td class="attendance-header">✅ ENTRADAS A TIEMPO</td>
+                                <td id="tiempo-t1">ND</td>
+                                <td id="tiempo-t2">ND</td>
+                                <td id="tiempo-t3">ND</td>
+                            </tr>
+                            <tr>
+                                <td class="attendance-header">⏳ ENTRADAS TARDES</td>
+                                <td id="tarde-t1">ND</td>
+                                <td id="tarde-t2">ND</td>
+                                <td id="tarde-t3">ND</td>
+                            </tr>
+                            <tr>
+                                <td class="attendance-header">📝 INASISTENCIAS CON PERMISO</td>
+                                <td>ND</td>
+                                <td>ND</td>
+                                <td>ND</td>
+                            </tr>
+                            <tr>
+                                <td class="attendance-header">❌ INASISTENCIAS</td>
+                                <td id="inasistencias-t1">ND</td>
+                                <td id="inasistencias-t2">ND</td>
+                                <td id="inasistencias-t3">ND</td>
+                            </tr>
+                            <tr>
+                                <td class="attendance-header">📊 PORCENTAJE ASISTENCIA</td>
+                                <td id="asistencia-t1">ND</td>
+                                <td id="asistencia-t2">ND</td>
+                                <td id="asistencia-t3">ND</td>
+                            </tr>
+                            <tr>
+                                <td class="attendance-header">📈 ASISTENCIA ANUAL</td>
+                                <td colspan="3" id="asistencia-anual">ND</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="summary-section">
+                    <div class="summary-card">
+                        <div class="summary-card-header">📊 ASISTENCIA ANUAL</div>
+                        <div class="summary-card-content" id="summary-asistencia">ND</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-card-header">📈 PROMEDIO DE NOTAS</div>
+                        <div class="summary-card-content" id="summary-promedio">ND</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-card-header">🏆 RESULTADO FINAL</div>
+                        <div class="summary-card-content" id="summary-resultado">ND</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuración del Google Apps Script
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwf_Yhom8RHXplsGS5R4Ci7YNg6LDKYQuh9ciaK7dx-HJTclXum_U7-1CIVXO2k_MvhxA/exec';
+
+        // Frases motivacionales para estudiantes
+        const motivationalMessages = [
+            "¡Tu esfuerzo de hoy será tu éxito de mañana! ¡Sigue adelante! 🚀",
+            "¡Cada día que estudias, creces un poco más! 🌱",
+            "¡Eres capaz de lograr todo lo que te propongas! ⭐",
+            "¡El conocimiento es tu mejor inversión! 💎",
+            "¡Cree en ti mismo y alcanza tus sueños! 🌟",
+            "¡Cada meta alcanzada te acerca a tu futuro brillante! ✨",
+            "¡Tu dedicación y esfuerzo valen la pena! 🏆",
+            "¡Nunca dejes de aprender, nunca dejes de crecer! 📚",
+            "¡Eres el autor de tu propia historia de éxito! 📖",
+            "¡Con constancia y pasión, todo es posible! 💪"
+        ];
+
+        // Cambiar mensaje motivacional
+        function setRandomMotivationalMessage() {
+            const randomIndex = Math.floor(Math.random() * motivationalMessages.length);
+            document.getElementById('motivationalText').textContent = motivationalMessages[randomIndex];
+        }
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            setRandomMotivationalMessage();
+            
+            // Permitir búsqueda con Enter
+            document.getElementById('studentId').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    buscarEstudiante();
+                }
+            });
+        });
+
+        // Función para obtener datos del estudiante por ID
+        async function obtenerDatosEstudiante(studentId) {
+            try {
+                const url = `${SCRIPT_URL}?id=${encodeURIComponent(studentId)}`;
+                const response = await fetch(url);
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Error al obtener datos:', error);
+                return null;
+            }
+        }
+
+        // Función para buscar estudiante
+        async function buscarEstudiante() {
+            const id = document.getElementById('studentId').value.trim();
+            const errorMessage = document.getElementById('errorMessage');
+            const loading = document.getElementById('loading');
+            const studentInfo = document.getElementById('studentInfo');
+            const gradesSection = document.getElementById('gradesSection');
+
+            if (!id) {
+                mostrarError('Por favor, ingresa tu ID estudiantil 📝');
+                return;
+            }
+
+            errorMessage.style.display = 'none';
+            loading.style.display = 'block';
+            studentInfo.style.display = 'none';
+            gradesSection.style.display = 'none';
+
+            try {
+                const datosEstudiante = await obtenerDatosEstudiante(id);
+                loading.style.display = 'none';
+
+                if (!datosEstudiante || datosEstudiante.error) {
+                    mostrarError(datosEstudiante?.error || 'ID no encontrado. Verifica tu ID e intenta nuevamente. 🔍');
+                    return;
+                }
+
+                // Mostrar información del estudiante
+                mostrarDatosEstudiante(datosEstudiante);
+                
+                // Cambiar mensaje motivacional cuando se encuentran datos
+                setRandomMotivationalMessage();
+
+            } catch (error) {
+                loading.style.display = 'none';
+                mostrarError('Error al buscar el estudiante. Intenta más tarde. 🔄');
+                console.error('Error:', error);
+            }
+        }
+
+        function mostrarError(mensaje) {
+            const errorMessage = document.getElementById('errorMessage');
+            errorMessage.textContent = mensaje;
+            errorMessage.style.display = 'block';
+        }
+
+        function mostrarDatosEstudiante(datos) {
+            // Mostrar información básica
+            document.getElementById('studentName').textContent = datos.nombres || 'N/A';
+            document.getElementById('studentLastName').textContent = datos.apellidos || 'N/A';
+            document.getElementById('studentInfo').style.display = 'block';
+
+            // Mostrar calificaciones
+            mostrarCalificaciones(datos);
+            
+            // Mostrar sección de calificaciones
+            document.getElementById('gradesSection').style.display = 'block';
+        }
+
+        function mostrarCalificaciones(datos) {
+            // Función para obtener valor sin decimales
+            const obtenerValor = (valor) => {
+                if (valor === undefined || valor === null || valor === '') return 'ND';
+                const numero = parseFloat(valor);
+                return isNaN(numero) ? 'ND' : Math.round(numero).toString();
+            };
+
+            // LENGUAJE
+            document.getElementById('lenguaje-t1').textContent = obtenerValor(datos.lenguaje?.trimestre1);
+            document.getElementById('lenguaje-p1').textContent = obtenerValor(datos.lenguaje?.porcentajeTrimestre1);
+            document.getElementById('lenguaje-t2').textContent = obtenerValor(datos.lenguaje?.trimestre2);
+            document.getElementById('lenguaje-p2').textContent = obtenerValor(datos.lenguaje?.porcentajeTrimestre2);
+            document.getElementById('lenguaje-t3').textContent = obtenerValor(datos.lenguaje?.trimestre3);
+            document.getElementById('lenguaje-p3').textContent = obtenerValor(datos.lenguaje?.porcentajeTrimestre3);
+            document.getElementById('lenguaje-total').textContent = obtenerValor(datos.lenguaje?.final);
+
+            // MATEMÁTICAS
+            document.getElementById('matematicas-t1').textContent = obtenerValor(datos.matematicas?.trimestre1);
+            document.getElementById('matematicas-p1').textContent = obtenerValor(datos.matematicas?.porcentajeTrimestre1);
+            document.getElementById('matematicas-t2').textContent = obtenerValor(datos.matematicas?.trimestre2);
+            document.getElementById('matematicas-p2').textContent = obtenerValor(datos.matematicas?.porcentajeTrimestre2);
+            document.getElementById('matematicas-t3').textContent = obtenerValor(datos.matematicas?.trimestre3);
+            document.getElementById('matematicas-p3').textContent = obtenerValor(datos.matematicas?.porcentajeTrimestre3);
+            document.getElementById('matematicas-total').textContent = obtenerValor(datos.matematicas?.final);
+
+            // NATURALES
+            document.getElementById('naturales-t1').textContent = obtenerValor(datos.naturales?.trimestre1);
+            document.getElementById('naturales-p1').textContent = obtenerValor(datos.naturales?.porcentajeTrimestre1);
+            document.getElementById('naturales-t2').textContent = obtenerValor(datos.naturales?.trimestre2);
+            document.getElementById('naturales-p2').textContent = obtenerValor(datos.naturales?.porcentajeTrimestre2);
+            document.getElementById('naturales-t3').textContent = obtenerValor(datos.naturales?.trimestre3);
+            document.getElementById('naturales-p3').textContent = obtenerValor(datos.naturales?.porcentajeTrimestre3);
+            document.getElementById('naturales-total').textContent = obtenerValor(datos.naturales?.final);
+
+            // COMPUTACIÓN
+            document.getElementById('computacion-t1').textContent = obtenerValor(datos.computacion?.trimestre1);
+            document.getElementById('computacion-p1').textContent = obtenerValor(datos.computacion?.porcentajeTrimestre1);
+            document.getElementById('computacion-t2').textContent = obtenerValor(datos.computacion?.trimestre2);
+            document.getElementById('computacion-p2').textContent = obtenerValor(datos.computacion?.porcentajeTrimestre2);
+            document.getElementById('computacion-t3').textContent = obtenerValor(datos.computacion?.trimestre3);
+            document.getElementById('computacion-p3').textContent = obtenerValor(datos.computacion?.porcentajeTrimestre3);
+            document.getElementById('computacion-total').textContent = obtenerValor(datos.computacion?.final);
+
+            // EMPRENDIMIENTO
+            document.getElementById('emprendimiento-t1').textContent = obtenerValor(datos.emprendimiento?.trimestre1);
+            document.getElementById('emprendimiento-p1').textContent = obtenerValor(datos.emprendimiento?.porcentajeTrimestre1);
+            document.getElementById('emprendimiento-t2').textContent = obtenerValor(datos.emprendimiento?.trimestre2);
+            document.getElementById('emprendimiento-p2').textContent = obtenerValor(datos.emprendimiento?.porcentajeTrimestre2);
+            document.getElementById('emprendimiento-t3').textContent = obtenerValor(datos.emprendimiento?.trimestre3);
+            document.getElementById('emprendimiento-p3').textContent = obtenerValor(datos.emprendimiento?.porcentajeTrimestre3);
+            document.getElementById('emprendimiento-total').textContent = obtenerValor(datos.emprendimiento?.final);
+
+            // ASISTENCIA
+            document.getElementById('asistencia-t1').textContent = obtenerValor(datos.asistencia?.trimestre1?.asistencia);
+            document.getElementById('puntual-t1').textContent = obtenerValor(datos.asistencia?.trimestre1?.entradaPuntual);
+            document.getElementById('tiempo-t1').textContent = obtenerValor(datos.asistencia?.trimestre1?.entradaTiempo);
+            document.getElementById('tarde-t1').textContent = obtenerValor(datos.asistencia?.trimestre1?.entradaTarde);
+            document.getElementById('inasistencias-t1').textContent = obtenerValor(datos.asistencia?.trimestre1?.inasistencias);
+
+            document.getElementById('asistencia-t2').textContent = obtenerValor(datos.asistencia?.trimestre2?.asistencia);
+            document.getElementById('puntual-t2').textContent = obtenerValor(datos.asistencia?.trimestre2?.entradaPuntual);
+            document.getElementById('tiempo-t2').textContent = obtenerValor(datos.asistencia?.trimestre2?.entradaTiempo);
+            document.getElementById('tarde-t2').textContent = obtenerValor(datos.asistencia?.trimestre2?.entradaTarde);
+            document.getElementById('inasistencias-t2').textContent = obtenerValor(datos.asistencia?.trimestre2?.inasistencias);
+
+            document.getElementById('asistencia-t3').textContent = obtenerValor(datos.asistencia?.trimestre3?.asistencia);
+            document.getElementById('puntual-t3').textContent = obtenerValor(datos.asistencia?.trimestre3?.entradaPuntual);
+            document.getElementById('tiempo-t3').textContent = obtenerValor(datos.asistencia?.trimestre3?.entradaTiempo);
+            document.getElementById('tarde-t3').textContent = obtenerValor(datos.asistencia?.trimestre3?.entradaTarde);
+            document.getElementById('inasistencias-t3').textContent = obtenerValor(datos.asistencia?.trimestre3?.inasistencias);
+
+            // RESUMEN
+            document.getElementById('asistencia-anual').textContent = obtenerValor(datos.resumenAnual?.asistenciaAnual);
+            document.getElementById('summary-asistencia').textContent = obtenerValor(datos.resumenAnual?.asistenciaAnual);
+            document.getElementById('summary-promedio').textContent = obtenerValor(datos.resumenAnual?.promedioNotas);
+            document.getElementById('summary-resultado').textContent = datos.resumenAnual?.resultadoFinal || 'ND';
+
+            // Determinar resultados de materias
+            determinarResultados();
+        }
+
+        function determinarResultados() {
+            const materias = ['lenguaje', 'matematicas', 'naturales', 'computacion', 'emprendimiento'];
+            
+            materias.forEach(materia => {
+                const total = document.getElementById(materia + '-total').textContent;
+                const resultadoElement = document.getElementById(materia + '-resultado');
+                
+                if (total === 'ND' || total === '') {
+                    resultadoElement.textContent = 'NO HAY RESULTADO';
+                } else {
+                    const nota = parseInt(total);
+                    if (nota >= 60) {
+                        resultadoElement.textContent = '✅ APROBADO';
+                        resultadoElement.style.color = '#4caf50';
+                        resultadoElement.style.fontWeight = 'bold';
+                    } else {
+                        resultadoElement.textContent = '❌ REPROBADO';
+                        resultadoElement.style.color = '#f44336';
+                        resultadoElement.style.fontWeight = 'bold';
+                    }
+                }
+            });
+        }
+
+        // Función de impresión mejorada para móviles y tablets
+        function imprimirArea() {
+            // Detectar si es dispositivo móvil
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            
+            if (isMobile) {
+                // Para dispositivos móviles usar método simplificado
+                imprimirTradicional();
+            } else {
+                // Para escritorio, usar método tradicional
+                imprimirTradicional();
+            }
+        }
+
+        function imprimirTradicional() {
+            const contenido = document.getElementById('areaImprimir').innerHTML;
+            const ventana = window.open('', '', 'height=600,width=800');
+            
+            ventana.document.write(`
+                <html>
+                <head>
+                    <title>📊 Reporte de Calificaciones - CREAMOS</title>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <style>
+                        * { margin: 0; padding: 0; box-sizing: border-box; }
+                        body { 
+                            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+                            background: white; 
+                            color: #333; 
+                            padding: 20px;
+                        }
+                        .header { 
+                            background: #4b74c6 !important; 
+                            color: white !important; 
+                            padding: 20px; 
+                            border-radius: 10px; 
+                            margin-bottom: 20px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                        }
+                        .school-name { font-size: 1.8em; font-weight: bold; }
+                        .school-subtitle { font-size: 1em; margin-top: 5px; }
+                        .portal-title { 
+                            background: rgba(255,255,255,0.2); 
+                            padding: 8px 16px; 
+                            border-radius: 15px; 
+                            margin-top: 10px;
+                            display: inline-block;
+                        }
+                        .logo { width: 100px; height: auto; border-radius: 8px; }
+                        .student-info-grid { 
+                            display: grid; 
+                            grid-template-columns: repeat(2, 1fr); 
+                            gap: 10px; 
+                            margin-bottom: 20px; 
+                        }
+                        .info-field { display: flex; }
+                        .info-label { 
+                            background: #4b74c6; 
+                            color: white; 
+                            padding: 8px 12px; 
+                            font-weight: bold; 
+                            border-radius: 5px 0 0 5px;
+                            min-width: 100px;
+                        }
+                        .info-value { 
+                            background: #f8f9fa; 
+                            padding: 8px 12px; 
+                            border: 1px solid #ddd; 
+                            flex: 1;
+                            border-radius: 0 5px 5px 0;
+                        }
+                        table { 
+                            width: 100%; 
+                            border-collapse: collapse; 
+                            margin-bottom: 20px; 
+                            border: 2px solid #4b74c6;
+                        }
+                        th, td { 
+                            border: 1px solid #ddd; 
+                            padding: 8px; 
+                            text-align: center; 
+                            font-size: 0.85em;
+                        }
+                        th { 
+                            background: #4b74c6 !important; 
+                            color: white !important; 
+                            font-weight: bold; 
+                        }
+                        .subject-name, .attendance-header { 
+                            background: #f093fb !important; 
+                            color: white !important; 
+                            font-weight: bold; 
+                            text-align: left !important; 
+                            padding-left: 15px !important;
+                        }
+                        .summary-section { 
+                            display: grid; 
+                            grid-template-columns: repeat(3, 1fr); 
+                            gap: 15px; 
+                            margin-top: 20px;
+                        }
+                        .summary-card { 
+                            border: 2px solid #4b74c6; 
+                            border-radius: 8px; 
+                            overflow: hidden;
+                        }
+                        .summary-card-header { 
+                            background: #4b74c6; 
+                            color: white; 
+                            padding: 10px; 
+                            font-weight: bold; 
+                            text-align: center;
+                        }
+                        .summary-card-content { 
+                            padding: 20px; 
+                            background: #f8f9fa; 
+                            font-size: 1.5em; 
+                            font-weight: bold; 
+                            text-align: center; 
+                            color: #4b74c6;
+                        }
+                        .contact-info { 
+                            background: #4ecdc4; 
+                            color: white; 
+                            padding: 10px; 
+                            border-radius: 8px; 
+                            text-align: center; 
+                            margin-bottom: 20px;
+                        }
+                        @media print {
+                            body { padding: 10px; }
+                            .header { background: #4b74c6 !important; }
+                        }
+                    </style>
+                </head>
+                <body>
+                    ${contenido}
+                </body>
+                </html>
+            `);
+            
+            ventana.document.close();
+            ventana.focus();
+            
+            // Esperar a que cargue antes de imprimir
+            setTimeout(() => {
+                ventana.print();
+                ventana.close();
+            }, 500);
+        }
+    </script>
+
+</body>
+</html>
